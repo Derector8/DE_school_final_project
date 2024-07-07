@@ -1,0 +1,14 @@
+For manual run:
+Open scripts_for_manual_run folder
+!!! Install all requirements from requirements.txt !!!
+Run steps:
+1) Open credentials.py and fill in your credentials(sometimes renew AWS credentials, if they are expired)
+2) In sql_scripts folder run create_tables.sql
+3) Run database_ingestion.py(to load ChemBL molecules and chembl_id_lookup data into postgres)
+4) In sql_scripts folder run ingest_logic_layer_tables.sql
+5) Run fingerprints_compute.py (to compute fingerprints for all molecules and save to s3 bucket and postgres table) 
+6) Run similarity_compute.py (to compute all similarities for input file's molecules and save to s3 bucket, and compute top 10 similarities and save to postgres fact table)
+7) In sql_scripts folder run ingest_dim_top10_table.sql
+8) In sql_scripts folder run create_views.sql
+
+That's all - go to your Postgres client and check tables and views!
