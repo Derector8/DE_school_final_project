@@ -18,8 +18,12 @@ from airflow.operators.empty import EmptyOperator
 from airflow.providers.postgres.operators.postgres import PostgresOperator
 from airflow.utils.trigger_rule import TriggerRule
 
-import scripts.database_ingestion as ingesting
 import scripts.credentials as cr
+Variable.set(key="secret_aws_s3_key_id", value=cr.AWS_S3_CREDENTIALS["key"])
+Variable.set(key="secret_aws_s3_access_key", value=cr.AWS_S3_CREDENTIALS["secret"])
+Variable.set(key="secret_aws_s3_token", value=cr.AWS_S3_CREDENTIALS["token"])
+Variable.set(key="secret_aws_postgres_engine", value=cr.AWS_POSTGRES_URI)
+import scripts.database_ingestion as ingesting
 from scripts import sql_scripts
 
 
@@ -31,11 +35,7 @@ default_args: dict = dict({
     'email_on_failure': True,
 })
 
-Variable.set(key="secret_aws_s3_key_id", value=cr.AWS_S3_CREDENTIALS["key"])
-Variable.set(key="secret_aws_s3_access_key", value=cr.AWS_S3_CREDENTIALS["secret"])
-Variable.set(key="secret_aws_s3_token", value=cr.AWS_S3_CREDENTIALS["token"])
 
-Variable.set(key="secret_aws_postgres_engine", value=cr.AWS_POSTGRES_URI)
 
 aws_postgres_conn: Connection = Connection(conn_id="aws_postgres",
                                     conn_type="postgresql",
