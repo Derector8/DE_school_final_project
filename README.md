@@ -33,7 +33,7 @@ This tables are ingested from staging layer with some data cleaning and setting 
 ## Usage:
 You can run this application in 2 ways - Manually or via Docker Airflow.
 
-####For Manual run:
+#### For Manual run:
 Open scripts_for_manual_run folder
 !!! Install all requirements from requirements.txt !!!
 Run steps:
@@ -49,7 +49,7 @@ Run steps:
 That's all - go to your Postgres client and check tables and views!
 If you want to calculate similarities for new data appeared in s3 bucket in future - just run similarity_compute.py(don't forget to provide new file_name template string as function argument at the bottom of script), truncate dim_top10_molecule_properties and launch ingest_dim_top10_table.sql(In sql_scripts folder)
 
-####For Docker Airflow run:
+#### For Docker Airflow run:
 1) Open airflow folder
 2) Open credentials.py(in scripts_folder) and fill in your credentials(sometimes renew AWS credentials in airflow, if they are expired)
 3) Run docker-compose up in airflow folder
